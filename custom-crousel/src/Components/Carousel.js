@@ -18,6 +18,11 @@ function Carousel() {
     const setPrev=()=>{
         currImg===0?setCurrImg(images.length-1):setCurrImg(currImg-1)
     }
+
+    const setIndexValue=(i)=>{
+        setCurrImg(i);
+    }
+
     React.useEffect(() => {
         const timer = setTimeout(() => {
           setNext();
@@ -39,6 +44,24 @@ function Carousel() {
                 <div className="center">
                     <h1>{images[currImg].title}</h1>
                     <p>{images[currImg].subtitle}</p>
+                    <div >
+                    {images.map((item, index)=>{
+                        return(<>
+                            {index===currImg?
+                                <div style={{display:'inline-block'}} className="circularCurrDiv" onClick={()=>setIndexValue(index)}>
+                                {index+1}
+                            </div>:
+                            <div style={{display:'inline-block'}} className="circularDiv" onClick={()=>setIndexValue(index)}>
+                            {index+1}
+                        </div>}
+                                </>
+                        
+                            // <div style={{display:'inline-block'}} className="circularDiv">
+                            //     {index+1}
+                            // </div>
+                        );
+                    })}
+                    </div>
                 </div>
                 <div className="right" onClick={()=>setNext()}>
                     <ArrowForwardIosIcon style={{fontSize:30}}/>
